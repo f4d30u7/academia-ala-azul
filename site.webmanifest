@@ -1,0 +1,19 @@
+{
+  "name": "Academia Ala Azul",
+  "short_name": "Ala Azul",
+  "description": "Academia interactiva de introducción a la formación de Piloto Privado de Avión en Argentina.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8ff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "./assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

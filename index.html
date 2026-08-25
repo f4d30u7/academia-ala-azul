@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <title>Academia Ala Azul | Piloto privado</title>
+  <meta name="description" content="Academia interactiva para familiarizarse con los conocimientos iniciales de la ruta a Piloto Privado de Avión en Argentina.">
+  <meta name="application-name" content="Academia Ala Azul">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Academia Ala Azul">
+  <meta property="og:description" content="Aprendizaje progresivo, práctica, repaso espaciado y seguimiento personal para futuros pilotos privados.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body data-app-version="1.2.0">
+  <!-- Academia Ala Azul 1.2.0 -->
+  <div id="onboarding" class="onboarding hidden" aria-modal="true" role="dialog">
+    <div class="onboard-card">
+      <div class="onboard-logo">🛩️</div>
+      <h1>Bienvenido a Ala Azul</h1>
+      <p>Un entrenador personal para construir una base teórica antes de iniciar la Licencia de Piloto Privado de Avión (PPA), guardar tu progreso y descubrir si esta aventura merece horas, dinero y una cantidad poco razonable de siglas.</p>
+      <div class="goal-options" id="goalOptions">
+        <button class="goal selected" data-goal="hobby"><span class="ico">🌤️</span><b>Hobby serio</b><small>Aprender y avanzar hacia la licencia privada sin presión profesional.</small></button>
+        <button class="goal" data-goal="dual"><span class="ico">🧭</span><b>Explorar ambos</b><small>Empezar como hobby y dejar abierta la ruta comercial.</small></button>
+        <button class="goal" data-goal="career"><span class="ico">✈️</span><b>Proyección profesional</b><small>Construir fundamentos con una posible reconversión futura.</small></button>
+      </div>
+      <div class="onboard-fields">
+        <label>Tu nombre<input id="onboardName" maxlength="30" placeholder="Tu nombre o alias" autocomplete="name"></label>
+        <label>Meta semanal<select id="onboardWeekly"><option value="50">50 puntos de experiencia (XP), ritmo tranquilo</option><option value="100" selected>100 XP, constancia</option><option value="200">200 XP, modo hangar</option></select></label>
+      </div>
+      <div class="onboard-foot"><button class="btn btn-primary" id="startApp">Comenzar ruta <span>→</span></button></div>
+    </div>
+  </div>
+
+  <div class="mobile-shade" id="mobileShade"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">🛩️</div><div><h1>Ala Azul</h1><small>Entrenador para piloto privado</small></div></div>
+      <nav class="nav" aria-label="Navegación principal">
+        <button class="nav-btn active" data-view="home"><span class="nav-ico">⌂</span>Inicio</button>
+        <button class="nav-btn" data-view="path"><span class="nav-ico">◉</span>Ruta de aprendizaje</button>
+        <button class="nav-btn" data-view="review"><span class="nav-ico">↻</span>Repaso <span class="nav-badge" id="reviewBadge">0</span></button>
+        <button class="nav-btn" data-view="glossary"><span class="nav-ico">Aa</span>Glosario</button>
+        <button class="nav-btn" data-view="fund"><span class="nav-ico">$</span>Fondo de vuelo</button>
+        <button class="nav-btn" data-view="profile"><span class="nav-ico">♙</span>Perfil y datos</button>
+      </nav>
+      <div class="side-bottom">
+        <div class="mini-level"><div class="mini-level-top"><span id="sideLevel">Nivel 1</span><small id="sideXp">0/150 XP</small></div><div class="mini-bar"><span id="sideBar" style="width:0%"></span></div></div>
+        <p class="side-disclaimer">Material educativo introductorio. No reemplaza un Centro de Instrucción de Aeronáutica Civil (CIAC), un instructor, el manual de vuelo, la información operacional ni la normativa oficial vigente.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="top-title"><h2 id="topGreeting">Buen vuelo</h2><p id="topSubtitle">Un concepto por vez. El avión puede esperar en tierra.</p></div>
+        <div class="top-actions">
+          <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+          <div class="stat-pill" title="Racha de estudio"><span>🔥</span><span id="streakTop">0 días</span></div>
+          <div class="stat-pill" title="Experiencia total"><span>⚡</span><span id="xpTop">0 XP</span></div>
+          <button class="icon-btn" id="themeBtn" aria-label="Cambiar tema" title="Cambiar tema">☾</button>
+        </div>
+      </header>
+
+      <section id="view-home" class="view active">
+        <div class="hero">
+          <div class="hero-inner">
+            <div><div class="eyebrow">Tu cabina de estudio</div><h2 id="heroTitle">Construí criterio antes de encender un motor</h2><p>Lecciones breves, preguntas conceptuales, repetición espaciada y una ruta basada en las áreas de conocimiento de la Licencia de Piloto Privado de Avión (PPA) en Argentina.</p><div class="hero-actions"><button class="btn btn-light" id="heroContinue">Continuar lección →</button><button class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4)" data-go="review">Repasar pendientes</button></div><div class="beginner-hint"><span aria-hidden="true">📖</span><span><b>Ayudas para principiantes activas.</b> Las siglas se desarrollan la primera vez y podés tocarlas para abrir una explicación.</span></div></div>
+            <div class="hero-plane" aria-hidden="true">🛩️</div>
+          </div>
+        </div>
+        <div class="grid grid-4 mt">
+          <div class="card kpi"><div class="kpi-icon">⚡</div><strong id="homeXp">0</strong><small>Puntos de experiencia (XP)</small><div class="trend" id="weeklyStatus">0 de 100 XP semanales</div></div>
+          <div class="card kpi"><div class="kpi-icon">✓</div><strong id="homeLessons">0/20</strong><small>Lecciones completadas</small><div class="trend" id="homeProgressText">0% de la ruta</div></div>
+          <div class="card kpi"><div class="kpi-icon">🎯</div><strong id="homeAccuracy">0%</strong><small>Precisión en preguntas</small><div class="trend" id="answerCount">Todavía sin respuestas</div></div>
+          <div class="card kpi"><div class="kpi-icon">🔥</div><strong id="homeStreak">0</strong><small>Días de racha</small><div class="trend" id="bestStreak">Mejor racha: 0</div></div>
+        </div>
+        <div class="grid grid-2 mt">
+          <div class="card" id="resumeCard"></div>
+          <div class="card"><div class="card-title"><div><h3>Meta semanal</h3><p id="weekLabel">Actividad de esta semana</p></div><b id="weeklyFraction">0/100 XP</b></div><div class="progress"><span id="weeklyBar" style="width:0%"></span></div><div id="weekDots" style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:17px"></div></div>
+        </div>
+        <div class="grid grid-2 mt">
+          <div class="card"><div class="card-title"><div><h3>Áreas de conocimiento</h3><p>Dominio estimado según tus respuestas</p></div><button class="btn btn-sm btn-soft" data-go="path">Ver ruta</button></div><div id="homeTopics"></div></div>
+          <div class="card"><div class="card-title"><div><h3>Actividad reciente</h3><p>Tu caja negra, pero menos dramática</p></div></div><div class="activity-list" id="activityList"></div></div>
+        </div>
+        <div class="notice warn mt"><b>Uso responsable:</b> esta herramienta sirve para familiarización y estudio previo. Para aprender procedimientos, tomar decisiones operacionales o prepararte formalmente, utilizá normativa vigente, material aprobado, un CIAC y un instructor habilitado.</div>
+      </section>
+
+      <section id="view-path" class="view">
+        <div class="section-head"><div><h2>Ruta de aprendizaje</h2><p>Veinte lecciones, desde el hangar administrativo hasta la toma de decisiones.</p></div><div class="actions"><button class="btn btn-soft" id="quickPractice">Práctica mixta</button><button class="btn btn-primary" id="pathContinue">Continuar</button></div></div>
+        <div class="path-wrap" id="pathContainer"></div>
+      </section>
+
+      <section id="view-review" class="view">
+        <div class="section-head"><div><h2>Centro de repaso</h2><p>La memoria humana pierde información. Qué diseño tan eficiente.</p></div><div class="actions"><button class="btn btn-soft" id="weakPractice">Temas débiles</button><button class="btn btn-primary" id="duePractice">Repasar pendientes</button></div></div>
+        <div class="review-hero">
+          <div class="card"><span class="eyebrow" style="color:var(--primary)">Repetición espaciada</span><div class="big-number" id="dueCount">0</div><h3 style="margin:7px 0">preguntas listas para hoy</h3><p style="color:var(--muted)">Las respuestas incorrectas vuelven pronto. Las correctas se espacian progresivamente. No es castigo, aunque se siente sospechosamente parecido.</p><div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:17px"><button class="btn btn-primary" id="duePractice2">Comenzar repaso</button><button class="btn btn-soft" id="allPractice">Práctica libre</button></div></div>
+          <div class="review-dial"><div style="text-align:center"><div class="dial" id="masteryDial"><strong id="masteryPct">0%</strong></div><b style="display:block;margin-top:10px">Dominio global</b></div></div>
+        </div>
+        <div class="grid grid-2 mt">
+          <div class="card"><div class="card-title"><div><h3>Dominio por área</h3><p>Calculado a partir del historial</p></div></div><div id="reviewTopics"></div></div>
+          <div class="card"><div class="card-title"><div><h3>Lecciones para reforzar</h3><p>Las de menor puntuación aparecen primero</p></div></div><div id="weakLessons"></div></div>
+        </div>
+      </section>
+
+      <section id="view-glossary" class="view">
+        <div class="section-head"><div><h2>Glosario aeronáutico</h2><p>Siglas, conceptos y palabras que la humanidad inventó para que una conversación sobre viento requiera subtítulos.</p></div><div class="actions"><button class="btn btn-soft" id="showAcronyms">Solo siglas</button><button class="btn btn-soft" id="showFavs">Solo favoritos</button></div></div>
+        <div class="notice glossary-intro"><b>Cómo usarlo:</b> buscá una sigla o una palabra. En las lecciones, los términos con subrayado punteado se pueden tocar para abrir esta misma ayuda sin abandonar el tema.</div>
+        <div class="glossary-tools"><div class="search"><input id="glossarySearch" type="search" placeholder="Buscar término, sigla o definición"></div><select id="glossaryCategory" class="btn btn-ghost" aria-label="Filtrar categoría"><option value="all">Todas las áreas</option></select></div>
+        <div class="glossary-list" id="glossaryList"></div>
+      </section>
+
+      <section id="view-fund" class="view">
+        <div class="section-head"><div><h2>Fondo de vuelo</h2><p>Porque las alas generan sustentación y las cuentas generan realidad.</p></div><div class="actions"><button class="btn btn-soft" id="addFundBtn">Registrar aporte</button></div></div>
+        <div class="fund-main">
+          <div class="fund-gauge"><div class="fund-ring" id="fundRing"><div><strong id="fundPct">0%</strong><small>del objetivo</small></div></div><h2 id="fundSaved">USD 0</h2><p style="color:var(--muted);margin-top:-6px">ahorrados de <b id="fundTarget">USD 7.500</b></p><div class="progress good"><span id="fundBar" style="width:0%"></span></div><p id="fundProjection" style="color:var(--muted);font-size:13px"></p></div>
+          <div class="card"><div class="card-title"><div><h3>Configuración del objetivo</h3><p>Se guarda solamente en este navegador</p></div></div><div class="form-grid"><div class="field"><label>Moneda</label><select id="fundCurrency"><option value="USD">USD</option><option value="ARS">ARS</option></select></div><div class="field"><label>Objetivo total</label><input id="fundTargetInput" type="number" min="1" step="1"></div><div class="field"><label>Aporte mensual previsto</label><input id="fundMonthly" type="number" min="0" step="1"></div><div class="field"><label>Saldo inicial</label><input id="fundInitial" type="number" min="0" step="1"></div><div class="field full"><button class="btn btn-primary" id="saveFundSettings">Guardar objetivo</button></div></div></div>
+        </div>
+        <div class="card mt"><div class="card-title"><div><h3>Historial de aportes</h3><p id="fundHistorySummary">Todavía no hay movimientos</p></div></div><div class="fund-history" id="fundHistory"></div></div>
+      </section>
+
+      <section id="view-profile" class="view">
+        <div class="section-head"><div><h2>Perfil y datos</h2><p>Tu progreso se guarda localmente en este navegador. No hay servidor acechando detrás de la cortina.</p></div></div>
+        <div class="card profile-head"><div class="avatar">🧑‍✈️</div><div><h2 id="profileName">Futuro piloto</h2><p id="profileGoal">Objetivo: explorar la aviación como hobby</p><div class="lesson-tags"><span class="tag xp" id="profileLevel">Nivel 1</span><span class="tag" id="profileSince">Desde hoy</span></div></div><button class="btn btn-soft" id="editProfile">Editar perfil</button></div>
+        <div class="grid grid-4 mt"><div class="card kpi"><div class="kpi-icon">⚡</div><strong id="profileXp">0</strong><small>XP total</small></div><div class="card kpi"><div class="kpi-icon">✓</div><strong id="profileCompleted">0</strong><small>Lecciones completas</small></div><div class="card kpi"><div class="kpi-icon">◷</div><strong id="profileMinutes">0</strong><small>Minutos estimados</small></div><div class="card kpi"><div class="kpi-icon">★</div><strong id="profileFavs">0</strong><small>Términos favoritos</small></div></div>
+        <div class="card mt"><div class="card-title"><div><h3>Logros</h3><p>Pequeñas recompensas químicas, ahora en formato aeronáutico</p></div></div><div class="badge-grid" id="achievements"></div></div>
+        <div class="grid grid-2 mt">
+          <div class="card"><div class="card-title"><div><h3>Copias de seguridad</h3><p>Exportá o restaurá el progreso mediante un archivo de respaldo JSON</p></div></div><div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn btn-primary" id="exportData">Exportar datos</button><label class="btn btn-soft" for="importData" style="cursor:pointer">Importar datos</label><input id="importData" type="file" accept="application/json" hidden></div></div>
+          <div class="card"><div class="card-title"><div><h3>Reiniciar aplicación</h3><p>El botón rojo, ancestral enemigo de la prudencia</p></div></div><button class="btn btn-danger" id="resetData">Borrar todo el progreso</button></div>
+        </div>
+        <div class="card mt"><div class="card-title"><div><h3>Fuentes y alcance</h3><p>Base normativa y material de consulta</p></div></div><div class="notice"><b>Contenido introductorio no oficial.</b> La estructura sigue las áreas de conocimiento de la Parte 61 de las Regulaciones Argentinas de Aviación Civil (RAAC), VI Edición de enero de 2026. Las preguntas de esta aplicación son originales y no reproducen el examen. Verificá siempre la versión vigente de la normativa y el material publicado por la Administración Nacional de Aviación Civil (ANAC).</div><ul style="color:var(--muted);line-height:1.8"><li><a href="https://www.argentina.gob.ar/normativa/422623_res65_pdf/archivo" target="_blank" rel="noopener">RAAC Parte 61, Licencias y habilitaciones para pilotos</a></li><li><a href="https://www.argentina.gob.ar/normativa/425729_res293_pdf/archivo" target="_blank" rel="noopener">RAAC Parte 141, Centros de Instrucción de Aeronáutica Civil</a></li><li><a href="https://www.argentina.gob.ar/anac/personal-aeronautico/examenes/ppa-piloto-privado-de-avion" target="_blank" rel="noopener">ANAC: material y banco de preguntas para Piloto Privado de Avión</a></li><li><a href="https://www.argentina.gob.ar/anac/certificacion-medica-aeronautica-cma" target="_blank" rel="noopener">ANAC: Certificación Médica Aeronáutica</a></li></ul></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="lessonModal"><div class="modal"><div class="modal-head"><div><small id="lessonUnitLabel" style="color:var(--muted);font-weight:800"></small><h3 id="lessonModalTitle">Lección</h3></div><button class="close" data-close="lessonModal" aria-label="Cerrar">×</button></div><div class="modal-body lesson-screen" id="lessonBody"></div><div class="modal-foot" id="lessonFoot"></div></div></div>
+  <div class="modal-backdrop" id="practiceModal"><div class="modal"><div class="modal-head"><div><small style="color:var(--muted);font-weight:800">SESIÓN DE REPASO</small><h3 id="practiceTitle">Práctica</h3></div><button class="close" data-close="practiceModal" aria-label="Cerrar">×</button></div><div class="modal-body" id="practiceBody"></div><div class="modal-foot" id="practiceFoot"></div></div></div>
+  <div class="modal-backdrop" id="simpleModal"><div class="modal" style="max-width:540px"><div class="modal-head"><h3 id="simpleTitle">Editar</h3><button class="close" data-close="simpleModal" aria-label="Cerrar">×</button></div><div class="modal-body" id="simpleBody"></div><div class="modal-foot" id="simpleFoot"></div></div></div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
